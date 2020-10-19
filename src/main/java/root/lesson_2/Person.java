@@ -1,7 +1,8 @@
 package root.lesson_2;
 
-import java.util.Comparator;
 import java.util.Objects;
+
+import static java.util.Comparator.comparing;
 
 public class Person implements Comparable<Person> {
 
@@ -44,11 +45,10 @@ public class Person implements Comparable<Person> {
 
     @Override
     public int compareTo(Person o) {
-        Comparator<Person> comparing = Comparator
-                .comparing(Person::getSex)
+        return comparing(Person::getSex)
                 .thenComparing(Person::getAge)
-                .thenComparing(Person::getName);
-        return comparing.compare(this, o);
+                .thenComparing(Person::getName)
+                .compare(this, o);
     }
 
     @Override
@@ -73,5 +73,34 @@ public class Person implements Comparable<Person> {
     @Override
     public int hashCode() {
         return Objects.hash(age, sex, name);
+    }
+
+    public static PersonBuilder builder() {
+        return new PersonBuilder();
+    }
+
+    public static class PersonBuilder {
+        private int age;
+        private Sex sex;
+        private String name;
+
+        public PersonBuilder withAge(int age) {
+            this.age = age;
+            return this;
+        }
+
+        public PersonBuilder withSex(Sex sex) {
+            this.sex = sex;
+            return this;
+        }
+
+        public PersonBuilder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Person build() {
+            return new Person(age, sex, name);
+        }
     }
 }

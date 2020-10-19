@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Solution {
+public class SortTest {
 
     private static final int ELEMENTS = 10000;
     private static final Random RANDOM = new Random();
@@ -24,7 +24,7 @@ public class Solution {
     }
 
     @Test
-    public void QuickSort(){
+    public void QuickSort() {
         List<Person> persons = getPersons();
         MegaSort megaSort = new QuickSortImpl();
         System.out.println("BEFORE");
@@ -37,11 +37,11 @@ public class Solution {
     private List<Person> getPersons() {
         List<Person> people = new ArrayList<>();
         for (int i = 0; i < ELEMENTS; i++) {
-            people.add(new Person(
-                    RANDOM.nextInt(100),
-                    RANDOM.nextBoolean() ? Sex.MAN : Sex.WOMAN,
-                    nextString(RANDOM.nextInt(STR.length() - 10))
-            ));
+            people.add(Person.builder()
+                    .withAge(RANDOM.nextInt(100))
+                    .withSex(RANDOM.nextBoolean() ? Sex.MAN : Sex.WOMAN)
+                    .withName(nextString(RANDOM.nextInt(STR.length() - 10)))
+                    .build());
         }
         return people;
     }
