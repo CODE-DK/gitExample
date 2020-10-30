@@ -1,3 +1,6 @@
 .idea
 target
 *.iml
+
+# data for code generation lesson 5
+/src/main/resources/lesson_5/out/
